@@ -1,9 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Hero from '@/components/Home/Hero.vue'
+</script>
 
 <template>
-  <main></main>
-
-  <h1>Estamos en el Home</h1>
+  <Hero />
 </template>
 
 <style scoped></style>
