@@ -1,0 +1,184 @@
+/* ============================================================
+   Paleta del proyecto (dark-first, generada desde Radix Colors):
+   - Accent:     #6E56CF  →  accent-600
+   - Gray:       #2B292D  →  gray-900
+   - Background: #0B0A0D  →  bg-background
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Tipografías: Fredoka para títulos, Sora para texto e interfaz */
+  --font-heading: 'Fredoka', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --font-mono:
+    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* Color de marca (accent) — violeta, 600 = #6E56CF exacto */
+  --color-accent-50: #f3f1fc;
+  --color-accent-100: #e9e5fa;
+  --color-accent-200: #d6cff5;
+  --color-accent-300: #baaeee;
+  --color-accent-400: #9a85e3;
+  --color-accent-500: #816ad8;
+  --color-accent-600: #6e56cf;
+  --color-accent-700: #5d44bc;
+  --color-accent-800: #4d389d;
+  --color-accent-900: #413180;
+  --color-accent-950: #2a1e55;
+
+  /* Neutros (gray) — sobrescribe el gray por defecto, 900 = #2B292D exacto */
+  --color-gray-50: #f7f6f8;
+  --color-gray-100: #efeef1;
+  --color-gray-200: #e0dfe3;
+  --color-gray-300: #c9c7ce;
+  --color-gray-400: #a5a2ab;
+  --color-gray-500: #817e88;
+  --color-gray-600: #67646e;
+  --color-gray-700: #504d57;
+  --color-gray-800: #3a383f;
+  --color-gray-900: #2b292d;
+  --color-gray-950: #161518;
+
+  /* Fondo global de la aplicación */
+  --color-background: #0b0a0d;
+
+  /* Colores semánticos de estado */
+  --color-success: oklch(0.72 0.19 149.6);
+  --color-warning: oklch(0.79 0.17 70.7);
+  --color-danger: oklch(0.64 0.21 25.3);
+  --color-info: oklch(0.68 0.15 237.3);
+
+  /* Radios y sombras propias */
+  --radius-card: 0.75rem;
+  --shadow-card: 0 1px 3px 0 oklch(0 0 0 / 0.35), 0 4px 12px -2px oklch(0 0 0 / 0.35);
+
+  /* Animaciones personalizadas */
+  --animate-fade-in: fade-in 0.3s ease-out both;
+  --animate-slide-up: slide-up 0.35s ease-out both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ------------------------------------------------------------
+   Estilos base globales (tema oscuro por defecto)
+   ------------------------------------------------------------ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background font-sans text-gray-100 antialiased;
+    min-height: 100dvh;
+  }
+
+  #app {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-semibold tracking-tight text-balance;
+  }
+
+  a {
+    @apply text-accent-400 transition-colors hover:text-accent-300;
+  }
+
+  ::selection {
+    @apply bg-accent-500/40;
+  }
+
+  /* Scrollbar sutil coherente con el tema */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-gray-700) transparent;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-500;
+  }
+}
+
+/* ------------------------------------------------------------
+   Componentes reutilizables
+   ------------------------------------------------------------ */
+@layer components {
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-accent-600 text-white hover:bg-accent-500 active:bg-accent-700;
+  }
+
+  .btn-secondary {
+    @apply border border-gray-700 bg-gray-900 text-gray-200 hover:bg-gray-800;
+  }
+
+  .btn-danger {
+    @apply bg-danger text-white hover:opacity-90;
+  }
+
+  .card {
+    @apply rounded-card bg-gray-900 p-6 shadow-card ring-1 ring-gray-800;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus:border-accent-500 focus:ring-2 focus:ring-accent-500/30 focus:outline-none;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+/* ------------------------------------------------------------
+   Utilidades propias
+   ------------------------------------------------------------ */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1rem;
+
+  @media (width >= theme(--breakpoint-sm)) {
+    padding-inline: 1.5rem;
+  }
+
+  @media (width >= theme(--breakpoint-lg)) {
+    padding-inline: 2rem;
+  }
+}
