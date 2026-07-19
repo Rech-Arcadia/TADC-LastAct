@@ -31,6 +31,12 @@ onMounted(() => {
       stagger: 0.05,
     })
 
+    gsap.from('#hero-image-jax', {
+      yPercent: 100,
+      ease: 'power3.out',
+      duration: 2.5,
+    })
+
     // Fase 2 — timeline ligado al scroll: se completa la oración y luego baja la imagen
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -50,7 +56,7 @@ onMounted(() => {
       stagger: 0.2,
     }).from('#hero-image', {
       yPercent: -100,
-      ease: 'none',
+      ease: 'power2.inOut',
       duration: 1.5,
     })
   })
