@@ -40,6 +40,8 @@ onMounted(() => {
         end: '+=700',
         scrub: true,
         pin: true,
+        // #app es display:flex y ScrollTrigger desactiva el pin-spacing en padres flex
+        pinSpacing: true,
       },
     })
   })
