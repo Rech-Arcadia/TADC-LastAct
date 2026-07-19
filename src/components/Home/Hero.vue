@@ -3,6 +3,8 @@ import { onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
+import pomniHand from '@/images/pomniHand1.webp'
+import jaxHand from '@/images/jaxHands1.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(SplitText)
@@ -29,20 +31,27 @@ onMounted(() => {
       stagger: 0.05,
     })
 
-    // Fase 2 — con el scroll, la oración se completa letra por letra
-    gsap.to(splitText.chars, {
-      opacity: 1,
-      ease: 'none',
-      stagger: 0.2,
+    // Fase 2 — timeline ligado al scroll: se completa la oración y luego baja la imagen
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '+=700',
+        end: '+=1000',
         scrub: true,
         pin: true,
         // #app es display:flex y ScrollTrigger desactiva el pin-spacing en padres flex
         pinSpacing: true,
       },
+    })
+
+    tl.to(splitText.chars, {
+      opacity: 1,
+      ease: 'none',
+      stagger: 0.2,
+    }).from('#hero-image', {
+      yPercent: -100,
+      ease: 'none',
+      duration: 1.5,
     })
   })
 })
@@ -66,6 +75,18 @@ onUnmounted(() => {
         </h1>
       </div>
     </div>
+    <img
+      :src="pomniHand"
+      alt=""
+      id="hero-image"
+      class="pointer-events-none absolute inset-x-0 top-0 mx-auto w-64 md:w-250"
+    />
+    <img
+      :src="jaxHand"
+      alt=""
+      id="hero-image-jax"
+      class="pointer-events-none absolute inset-x-0 -bottom-6 mx-auto w-64 md:w-290"
+    />
   </main>
 </template>
 
