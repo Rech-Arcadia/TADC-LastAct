@@ -77,10 +77,11 @@ onUnmounted(() => {
     >
       <div class="mx-auto flex h-full w-full items-center justify-center">
         <h1
-          class="text-[clamp(3rem,10.5vw,200px)] font-semibold uppercase text-white [text-shadow:0_0_2px_rgba(255,255,255,1),0_0_4px_rgba(255,255,255,.8),0_0_16px_rgba(255,255,255,.55)]"
+          class="text-center text-[clamp(3rem,10.5vw,200px)] font-semibold uppercase leading-none text-white [text-shadow:0_0_2px_rgba(255,255,255,1),0_0_4px_rgba(255,255,255,.8),0_0_16px_rgba(255,255,255,.55)]"
           id="hero-title"
         >
-          The Last Act
+          <span class="block">The Last</span>
+          <span class="-mt-[0.15em] block">Act</span>
         </h1>
       </div>
     </div>
