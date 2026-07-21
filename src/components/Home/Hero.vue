@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
+import Subtitle from '@/components/Home/Subtitle.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import pomniHand from '@/images/pomniHand1.webp'
@@ -97,6 +98,8 @@ onUnmounted(() => {
       id="hero-image-jax"
       class="pointer-events-none absolute inset-x-0 -bottom-6 mx-auto w-[61vw]"
     />
+
+    <Subtitle />
   </main>
 </template>
 
