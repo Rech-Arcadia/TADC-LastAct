@@ -17,7 +17,7 @@ withDefaults(
     :class="
       variant === 'primary'
         ? 'gap-2 rounded-full bg-amber-400 px-5 py-3 text-xs font-semibold text-gray-950 hover:bg-amber-300 sm:px-6 sm:text-sm'
-        : 'gap-3 text-xs font-semibold text-white sm:text-sm'
+        : 'gap-3 text-xs font-semibold text-amber-300 sm:text-sm'
     "
   >
     <span
