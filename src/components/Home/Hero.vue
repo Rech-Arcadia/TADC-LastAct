@@ -70,13 +70,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <main class="relative min-h-screen w-screen overflow-hidden" id="hero">
+  <main class="relative min-h-dvh w-full overflow-hidden" id="hero">
     <div
       class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_-10%,--alpha(var(--color-accent-200)/25%),transparent)]"
       aria-hidden="true"
     >
       <div class="mx-auto flex h-full w-full items-center justify-center">
-        <h1 class="text-10xl sm:text-6xl lg:text-[200px] uppercase" id="hero-title">
+        <h1
+          class="text-[clamp(3rem,10.5vw,200px)] font-semibold uppercase text-white [text-shadow:0_0_2px_rgba(255,255,255,1),0_0_4px_rgba(255,255,255,.8),0_0_16px_rgba(255,255,255,.55)]"
+          id="hero-title"
+        >
           The Last Act
         </h1>
       </div>
@@ -85,13 +88,13 @@ onUnmounted(() => {
       :src="pomniHand"
       alt=""
       id="hero-image"
-      class="pointer-events-none absolute inset-x-0 top-0 mx-auto w-64 md:w-250"
+      class="pointer-events-none absolute inset-x-0 top-0 mx-auto w-[52vw]"
     />
     <img
       :src="jaxHand"
       alt=""
       id="hero-image-jax"
-      class="pointer-events-none absolute inset-x-0 -bottom-6 mx-auto w-64 md:w-290"
+      class="pointer-events-none absolute inset-x-0 -bottom-6 mx-auto w-[61vw]"
     />
   </main>
 </template>
