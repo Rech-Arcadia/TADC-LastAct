@@ -13,6 +13,7 @@ withDefaults(
 <template>
   <a
     :href="href"
+    target="_blank"
     class="inline-flex items-center uppercase tracking-wide transition-colors"
     :class="
       variant === 'primary'
