@@ -1,11 +1,45 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import JaxFalling from '@/images/JaxFalling.webp'
+
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  const hero = document.getElementById('hero')
+  const jaxFalling = document.querySelector<HTMLImageElement>('#hero img')
+
+  if (!hero || !jaxFalling) return
+
+  gsap.fromTo(
+    jaxFalling,
+    { yPercent: -20 },
+    {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: hero,
+        start: 'top top',
+        end: '+=1400',
+        scrub: true,
+      },
+    },
+  )
+})
+</script>
 
 <template>
   <main class="relative min-h-dvh w-full overflow-hidden" id="hero">
     <div
-      class="flex h-screen w-screen items-center justify-center bg-gray-950 text-4xl font-bold text-gray-50"
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_15%_85%_at_50%_10%,--alpha(var(--color-accent-200)/25%),transparent)]"
+      aria-hidden="true"
     >
-      Jax-Void
+      <img
+        :src="JaxFalling"
+        alt="Jax Falling"
+        class="pointer-events-none absolute inset-x-0 mx-auto w-[21vw] opacity-50"
+      />
     </div>
   </main>
 </template>
