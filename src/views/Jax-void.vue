@@ -12,20 +12,12 @@ onMounted(() => {
 
   if (!hero || !jaxFalling) return
 
-  gsap.fromTo(
-    jaxFalling,
-    { yPercent: -20 },
-    {
-      yPercent: 20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: '+=1400',
-        scrub: true,
-      },
-    },
-  )
+  gsap.from('#img-jax-fall', {
+    startAt: { yPercent: 80 },
+    yPercent: -900,
+    ease: 'power3.out',
+    duration: 8.5,
+  })
 })
 </script>
 
@@ -39,6 +31,7 @@ onMounted(() => {
         :src="JaxFalling"
         alt="Jax Falling"
         class="pointer-events-none absolute inset-x-0 mx-auto w-[21vw] opacity-50"
+        id="img-jax-fall"
       />
     </div>
   </main>
