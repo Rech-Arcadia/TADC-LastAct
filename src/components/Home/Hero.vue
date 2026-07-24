@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 import { gsap } from 'gsap'
 import Subtitle from '@/components/Home/Subtitle.vue'
+import GlitchOverlay from '@/components/Home/GlitchOverlay.vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import pomniHand from '@/images/pomniHand1.webp'
 import jaxHand from '@/images/jaxHands1.webp'
+
+const glitchRef = useTemplateRef<InstanceType<typeof GlitchOverlay>>('glitchRef')
 
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(SplitText)
@@ -43,7 +46,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '+=1000',
+        end: '+=1400',
         scrub: true,
         pin: true,
         // #app es display:flex y ScrollTrigger desactiva el pin-spacing en padres flex
@@ -60,6 +63,9 @@ onMounted(() => {
       ease: 'power2.inOut',
       duration: 1.5,
     })
+
+    const glitchTl = glitchRef.value?.build()
+    if (glitchTl) tl.add(glitchTl, '+=2.5')
   })
 })
 
@@ -100,6 +106,8 @@ onUnmounted(() => {
     />
 
     <Subtitle />
+
+    <GlitchOverlay ref="glitchRef" text="No queria irme" />
   </main>
 </template>
 
