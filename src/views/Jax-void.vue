@@ -10,7 +10,6 @@ let ctx: gsap.Context
 
 onMounted(() => {
   ctx = gsap.context(() => {
-    // La caída arranca cuando la sección entra en viewport, no al montar
     gsap.fromTo(
       '#img-jax-fall',
       {
