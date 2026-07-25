@@ -46,7 +46,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '+=1400',
+        end: '+=1550',
         scrub: true,
         pin: true,
         // #app es display:flex y ScrollTrigger desactiva el pin-spacing en padres flex
@@ -65,7 +65,12 @@ onMounted(() => {
     })
 
     const glitchTl = glitchRef.value?.build()
-    if (glitchTl) tl.add(glitchTl, '+=2.5')
+    if (glitchTl) {
+      // Ralentiza solo el glitch; el `end` del ScrollTrigger sube en proporción
+      // para que las letras y la imagen conserven su ritmo de scroll
+      glitchTl.timeScale(0.7)
+      tl.add(glitchTl, '+=2.5')
+    }
   })
 })
 
