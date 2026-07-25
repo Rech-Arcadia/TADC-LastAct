@@ -4,6 +4,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import JaxFalling from '@/images/JaxFalling.webp'
 import Memory1 from '@/images/Memories1.webp'
+import Memory2 from '@/images/Memories2.webp'
+import Memory3 from '@/images/Memories3.webp'
+import Memory4 from '@/images/Memories4.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -11,11 +14,65 @@ let ctx: gsap.Context
 
 onMounted(() => {
   ctx = gsap.context(() => {
-    gsap.from('#light', {
-      opacity: 0,
-      duration: 1,
-      scale: 1.8,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#jax-void',
+        start: 'top 70%',
+      },
     })
+
+    tl.from('#light', {
+      opacity: 0,
+      scale: 1.8,
+      duration: 1,
+    })
+      // Un solo tween para todos los recuerdos: arrancan casi invisibles y
+      // suben hasta la opacidad que les da el CSS. Con stagger igual a la
+      // duración, cada uno empieza justo cuando el anterior acaba; añadir un
+      // Memories3 ya no toca el timeline.
+      .from(
+        '.memory',
+        {
+          opacity: 0.04,
+          duration: 6.4,
+          ease: 'power2.out',
+          stagger: 1.4,
+        },
+        // Solapa medio segundo con la luz para que no se sienta a trompicones
+        '-=0.5',
+      )
+      // La pregunta cierra la secuencia. Entra 4s antes del final de los fades:
+      // con power2.out los recuerdos ya están asentados mucho antes de que su
+      // tween termine, y sin este solape quedaban ~4s en los que no pasa nada.
+      // Sigue siendo relativa al final, así que un Memories5 la recoloca sola.
+      .fromTo(
+        '#question',
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 3.5,
+          ease: 'power2.out',
+        },
+        '-=5',
+      )
+      // Se añade al final del código a propósito: repeat -1 vuelve infinita la
+      // duración del timeline, así que a partir de aquí el append por defecto
+      // deja de servir. Por eso va con posición absoluta (2s) y de último.
+      // El stagger desfasa los recuerdos para que no respiren al unísono, que
+      // es lo que delata la animación.
+      .to(
+        '.memory__frame',
+        {
+          scale: 1.05,
+          yPercent: -3,
+          duration: 2.5,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          stagger: 1.25,
+        },
+        2,
+      )
 
     gsap.fromTo(
       '#img-jax-fall',
@@ -24,7 +81,7 @@ onMounted(() => {
       },
       {
         y: '30vh',
-        duration: 3.5,
+        duration: 6.5,
         scrollTrigger: {
           trigger: '#jax-void',
           start: 'top bottom',
@@ -32,14 +89,6 @@ onMounted(() => {
         },
       },
     )
-
-    gsap.to('.memory__frame', {
-      yPercent: -3,
-      duration: 1.5,
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-    })
   })
 })
 
@@ -72,6 +121,47 @@ onUnmounted(() => {
         <img :src="Memory1" alt="" />
       </div>
     </figure>
+
+    <figure
+      class="memory pointer-events-none absolute bottom-[10vh] left-[22vw] w-[11vw]"
+      id="img-memory-2"
+      aria-hidden="true"
+    >
+      <div class="memory__frame">
+        <img :src="Memory2" alt="" />
+      </div>
+    </figure>
+
+    <figure
+      class="memory pointer-events-none absolute top-[16vh] right-[14vw] w-[11vw]"
+      id="img-memory-3"
+      aria-hidden="true"
+    >
+      <div class="memory__frame">
+        <img :src="Memory3" alt="" />
+      </div>
+    </figure>
+
+    <figure
+      class="memory pointer-events-none absolute bottom-[16vh] right-[16vw] w-[13vw]"
+      id="img-memory-4"
+      aria-hidden="true"
+    >
+      <div class="memory__frame">
+        <img :src="Memory4" alt="" />
+      </div>
+    </figure>
+
+    <div
+      class="absolute bottom-[2vh] right-[2vw] flex items-center justify-center text-center leading-snug"
+      id="question"
+    >
+      <h1
+        class="text-2xl font-semibold text-white [text-shadow:0_0_1px_rgba(255,255,255,1),0_0_2px_rgba(255,255,255,.8),0_0_4px_rgba(255,255,255,.55)]"
+      >
+        ¿Haz hecho algo de lo que te arrepientes...?
+      </h1>
+    </div>
   </main>
 </template>
 
@@ -95,7 +185,7 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
   opacity: 0.5;
-  filter: grayscale(0.82) brightness(1.2) contrast(0.75) blur(0.6px);
+  filter: grayscale(0.82) brightness(1.2) contrast(0.75) blur(0.2px);
 }
 
 /* Sombra interna: hunde el borde en el color del fondo (#0B0A0D) en vez de
