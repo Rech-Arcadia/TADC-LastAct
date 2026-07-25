@@ -10,6 +10,12 @@ let ctx: gsap.Context
 
 onMounted(() => {
   ctx = gsap.context(() => {
+    gsap.from('#light', {
+      opacity: 0,
+      duration: 1,
+      scale: 1.8,
+    })
+
     gsap.fromTo(
       '#img-jax-fall',
       {
@@ -38,6 +44,7 @@ onUnmounted(() => {
     <div
       class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_15%_85%_at_50%_10%,--alpha(var(--color-accent-200)/25%),transparent)]"
       aria-hidden="true"
+      id="light"
     >
       <img
         :src="JaxFalling"
