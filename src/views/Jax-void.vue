@@ -3,6 +3,7 @@ import { onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import JaxFalling from '@/images/JaxFalling.webp'
+import Memory1 from '@/images/Memories1.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -31,6 +32,14 @@ onMounted(() => {
         },
       },
     )
+
+    gsap.to('.memory__frame', {
+      yPercent: -3,
+      duration: 1.5,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+    })
   })
 })
 
@@ -53,7 +62,49 @@ onUnmounted(() => {
         id="img-jax-fall"
       />
     </div>
+
+    <figure
+      class="memory pointer-events-none absolute top-[20vh] left-[10vw] w-[15vw]"
+      id="img-memory-1"
+      aria-hidden="true"
+    >
+      <div class="memory__frame">
+        <img :src="Memory1" alt="" />
+      </div>
+    </figure>
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.memory {
+  filter: drop-shadow(0 0 1.6vw rgb(255 255 255 / 10%));
+}
+
+.memory__frame {
+  position: relative;
+  aspect-ratio: 1;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 36%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 52%, #000 26%, transparent 72%);
+}
+
+/* Descolorido: casi gris, levantado y con poco contraste. El blur le quita el
+   filo digital — los recuerdos no están enfocados. */
+.memory__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  filter: grayscale(0.82) brightness(1.2) contrast(0.75) blur(0.6px);
+}
+
+/* Sombra interna: hunde el borde en el color del fondo (#0B0A0D) en vez de
+   dibujar un contorno. En un <img> el inset se pintaría por debajo. */
+.memory__frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 3vw 1vw rgb(11 10 13 / 70%);
+  background: radial-gradient(circle at 50% 42%, transparent 35%, rgb(11 10 13 / 65%));
+}
+</style>
