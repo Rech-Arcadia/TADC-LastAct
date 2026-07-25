@@ -108,7 +108,8 @@
    ------------------------------------------------------------ */
 @layer base {
   html {
-    scroll-behavior: smooth;
+    /* Sin scroll-behavior: smooth — pelea con ScrollToPlugin y ScrollTrigger,
+       que animan el scroll ellos mismos. El suavizado lo da GSAP. */
     color-scheme: dark;
     -webkit-tap-highlight-color: transparent;
   }
