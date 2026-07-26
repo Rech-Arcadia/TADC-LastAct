@@ -8,8 +8,8 @@ import DotsNav from '@/components/common/dots-nav.vue'
 <template>
   <Hero />
   <JaxVoid />
-  <DotsNav />
   <InfoCharacters />
+  <DotsNav />
 </template>
 
 <style scoped></style>
