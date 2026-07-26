@@ -68,7 +68,7 @@ const selected = computed(() => characters.find((c) => c.id === selectedId.value
           </div>
         </header>
 
-        <hr class="my-6 border-white/15" />
+        <hr class="my-9 border-white/15" />
 
         <ul class="mx-auto flex max-w-[19rem] flex-wrap justify-center gap-4">
           <li v-for="character in characters" :key="character.id">
