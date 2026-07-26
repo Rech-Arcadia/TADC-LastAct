@@ -2,11 +2,11 @@
 import { onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import JaxFalling from '@/images/JaxFalling.webp'
-import Memory1 from '@/images/Memories1.webp'
-import Memory2 from '@/images/Memories2.webp'
-import Memory3 from '@/images/Memories3.webp'
-import Memory4 from '@/images/Memories4.webp'
+import JaxFalling from '@/images/JaxVoid/JaxFalling.webp'
+import Memory1 from '@/images/JaxVoid/Memories1.webp'
+import Memory2 from '@/images/JaxVoid/Memories2.webp'
+import Memory3 from '@/images/JaxVoid/Memories3.webp'
+import Memory4 from '@/images/JaxVoid/Memories4.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
