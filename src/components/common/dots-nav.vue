@@ -18,6 +18,7 @@ const props = withDefaults(
     sections: () => [
       { id: 'hero', label: 'The Last Act' },
       { id: 'jax-void', label: 'El vacío' },
+      { id: 'info-characters', label: 'Personajes' },
     ],
     side: 'right',
   },
